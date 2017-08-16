@@ -402,11 +402,8 @@ var json_parse = (function() {
     if (ch === '[') {
       next('[');
       white();
-      if (ch === ']') {
-        next(']');
-        return arr; // empty array
-      }
       while (ch) {
+        // ignore trailing commas in arrays
         if (ch === ']') {
           next(']');
           return arr; // empty array
@@ -432,11 +429,6 @@ var json_parse = (function() {
     if (ch === '{') {
       next('{');
       white();
-      // TODO remove this for the one in the loop below?
-      if (ch === '}') {
-        next('}');
-        return obj; // empty object
-      }
       while (ch) {
         // ignore trailing commas in objects
         if (ch == '}') {
