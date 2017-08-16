@@ -264,6 +264,28 @@ var json_parse = (function() {
       return value;
     }
   }
+
+  // parse a key in a property object
+  function keyName() {
+    if (ch === '"' || ch === "'") return string();
+
+    var name = '';
+
+    if (ch == '{' || ch == '[' || ch == ']' || ch == ',') {
+      error("Banned starting char '" + ch + "' for property key name");
+    }
+    if (ch == ':') {
+      error('Empty key name (use empty string)');
+    }
+    while (ch && ch != '{' && ch != '[' && ch != ']' && ch != ',' && ch > ' ' && ch != '"' && ch != "'") {
+      if (ch == ':') {
+        return name;
+      }
+      name += ch;
+      next();
+    }
+    error('Bad key name');
+  }
   
   // Parse a string value.
   function string() {
@@ -436,7 +458,7 @@ var json_parse = (function() {
           next('}');
           return obj;
         }
-        key = string();
+        key = keyName();
         white();
         next(':');
         if (Object.hasOwnProperty.call(obj, key)) {
