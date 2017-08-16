@@ -1,0 +1,20 @@
+{ wemes: "cool",
+  boolean: true,
+  rege1: /sed/g,
+  rege2: /sed/gi,
+  crap: null,
+  "array": [
+    0, 1, 2, 3, 1.5, 8,
+  ],
+  "nested": {
+    "array": [
+        1, 4, 5
+    ],
+    "whew": {
+        "another": true
+    }
+  },
+  "come": "on!",
+  "empty": {},
+  "emptyArray": [],
+}

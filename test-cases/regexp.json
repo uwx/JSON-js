@@ -1,0 +1,5 @@
+{ "rege1": /sed/g,
+  "rege2": /sed/gi,
+  "regeArr": [ /fuck/i, /bees/y ],
+  "regeArr2": [/fuck/i,/bees/y],
+}

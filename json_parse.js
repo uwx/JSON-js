@@ -374,6 +374,31 @@ var json_parse = (function() {
     }
   }
 
+  function regexp() {
+    var pattern = '';
+
+    while (next()) {
+      if (ch == '/') {
+        return new RegExp(pattern, regexpFlags());
+      }
+      pattern += ch;
+    }
+  }
+
+  const validRegexpFlags = ['g','i','m','u','y'];
+  function regexpFlags() {
+    var flags = '';
+    while (next()) {
+      if (ch == '}' || ch == ',' || ch == ']' || ch <= ' ' || !ch) {
+        return flags;
+      }
+      if (!validRegexpFlags.includes(ch)) {
+        error("Invalid regexp flag '" + ch + "'");
+      }
+      flags += ch;
+    }
+  }
+
   // Skip whitespace. 
   function white() {
     while (ch) {
@@ -492,6 +517,8 @@ var json_parse = (function() {
         return string();
       case '`':
         return stringMultiline();
+      case '/':
+        return regexp();
       case '-':
         return number();
       default:
