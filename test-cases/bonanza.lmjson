@@ -1,0 +1,26 @@
+{ wemes: "cool",
+  boolean: true,
+  rege1: /sed/g,
+  rege2: /sed/gi,
+  /*
+  dont: "appear"
+   */
+  crap: null,
+  // This is an array
+  "array": [
+    0, 1, 2, 3, 1.5, 8, // Trailing
+  ],
+  "nested": {
+    "array": [
+        1, 4,
+        # Comment in a weird place
+        5
+    ],
+    "whew": {
+        "another": true
+    } // Not trailing
+  },
+  "come": "on!",
+  "empty": {},
+  "emptyArray": [],
+}
