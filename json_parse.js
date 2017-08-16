@@ -403,10 +403,10 @@ var json_parse = (function() {
       next('[');
       white();
       while (ch) {
-        // ignore trailing commas in arrays
+        // ignore trailing commas in arrays (or empty array)
         if (ch === ']') {
           next(']');
-          return arr; // empty array
+          return arr;
         }
         arr.push(value());
         white();
@@ -430,7 +430,7 @@ var json_parse = (function() {
       next('{');
       white();
       while (ch) {
-        // ignore trailing commas in objects
+        // ignore trailing commas in objects (or empty object)
         if (ch == '}') {
           next('}');
           return obj;
