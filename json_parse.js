@@ -1,3 +1,30 @@
+
+/*
+Contains content from HJSON-JS <https://github.com/hjson/hjson-js> under MIT:
+
+The MIT License (MIT)
+
+Copyright (c) 2014-2017 Christian Zangl
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
+
 /*
   json_parse.js
   2016-05-02
@@ -193,6 +220,12 @@ var json_parse = (function() {
     return text.substring(at, at+n);
   }
 
+  // find a char at offset
+  function peekChar(offs) {
+    // range check is not required
+    return text.charAt(at + offs);
+  }
+
   // Parse a number value.
   function number() {
     var value;
@@ -270,6 +303,52 @@ var json_parse = (function() {
       }
     }
     error('Bad string');
+  }
+
+  // Parse a multiline string value.
+  function stringMultiline() {
+    next();
+
+    // Parse a multiline string value.
+    var string = '';
+
+    // we are at ''' +1 - get indent
+    var indent = 0;
+    while (true) {
+      var c=peekChar(-indent-2); // was -5
+      if (!c || c === '\n') break;
+      indent++;
+    }
+
+    function skipIndent() {
+      var skip = indent;
+      while (ch && ch <= ' ' && ch !== '\n' && skip-- > 0) next();
+    }
+
+    // skip white/to (newline)
+    while (ch && ch <= ' ' && ch !== '\n') next();
+    if (ch === '\n') {
+     next(); skipIndent(); 
+    }
+
+    // When parsing multiline string values, we must look for ' characters.
+    while (true) {
+      if (!ch) {
+        error('Bad multiline string');
+      } else if (ch === '`') {
+        next();
+        if (string.slice(-1) === '\n') string=string.slice(0, -1); // remove last EOL
+        return string;
+      }
+      if (ch === '\n') {
+        string += '\n';
+        next();
+        skipIndent();
+      } else {
+        if (ch !== '\r') string += ch;
+        next();
+      }
+    }
   }
 
   // Skip whitespace. 
@@ -391,6 +470,8 @@ var json_parse = (function() {
         return array();
       case '"':
         return string();
+      case '`':
+        return stringMultiline();
       case '-':
         return number();
       default:
@@ -450,4 +531,14 @@ console.log(json_parse('{ "wemes": /*comment*/ "cool" }')); // standard JSON + c
 console.log(json_parse('{ "wemes": /*comment*/ "cool", }')); // trailing comma + comment
 console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool" }')); // standard JSON + 2 comments
 console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool", }')); // trailing comma + 2 comments
+console.log(json_parse('{ "wemes": `cool` }')); // multiline string, single line
+console.log(json_parse(`{ "wemes": \`
+cool\` }`)); // multiline string, bad break
+
+const c = `
+{ "wemes": \`cool
+            cool\` }`;
+console.log(c);
+console.log(json_parse(c
+)); // multiline string, good break
 //console.log(json_parse('{ "wemes": false ]'));
