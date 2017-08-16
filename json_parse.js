@@ -407,6 +407,10 @@ var json_parse = (function() {
         return arr; // empty array
       }
       while (ch) {
+        if (ch === ']') {
+          next(']');
+          return arr; // empty array
+        }
         arr.push(value());
         white();
         if (ch === ']') {
@@ -525,20 +529,4 @@ var json_parse = (function() {
   };
 }());
 
-console.log(json_parse('{ "wemes": "cool" }')); // standard JSON
-console.log(json_parse('{ "wemes": "cool", }')); // trailing comma
-console.log(json_parse('{ "wemes": /*comment*/ "cool" }')); // standard JSON + comment
-console.log(json_parse('{ "wemes": /*comment*/ "cool", }')); // trailing comma + comment
-console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool" }')); // standard JSON + 2 comments
-console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool", }')); // trailing comma + 2 comments
-console.log(json_parse('{ "wemes": `cool` }')); // multiline string, single line
-console.log(json_parse(`{ "wemes": \`
-cool\` }`)); // multiline string, bad break
-
-const c = `
-{ "wemes": \`cool
-            cool\` }`;
-console.log(c);
-console.log(json_parse(c
-)); // multiline string, good break
-//console.log(json_parse('{ "wemes": false ]'));
+module.exports = json_parse;
