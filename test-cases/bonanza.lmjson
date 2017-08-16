@@ -21,6 +21,7 @@
     } // Not trailing
   },
   "come": "on!",
+  "come": @"Literal string\Documents\Memes\",
   "empty": {},
   "emptyArray": [],
 }

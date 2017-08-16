@@ -328,6 +328,25 @@ var json_parse = (function() {
     error('Bad string');
   }
 
+  // Parse a literal string value. @"Any\Backslashes\valid\even\u\"
+  function stringNoEscape() {
+    var value = '';
+
+    // When parsing for string values, we must look for " and \ characters.
+
+    if (ch === '"' || ch === "'") {
+      const endChar = ch; // single or double quote
+      while (next()) {
+        if (ch === endChar) {
+          next();
+          return value;
+        }
+        value += ch;
+      }
+    }
+    error('Bad literal string');
+  }
+
   // Parse a multiline string value.
   function stringMultiline() {
     next();
@@ -512,6 +531,9 @@ var json_parse = (function() {
         return object();
       case '[':
         return array();
+      case '@':
+        next('@');
+        return stringNoEscape();
       case "'":
       case '"':
         return string();
