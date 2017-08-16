@@ -4,7 +4,7 @@ Lean and simple JSON. For humans to write.
 
 ## Usage
 
-```
+```js
 const lmjsonParse = require('lmjson');
 
 const object = lmjsonParse(`{
