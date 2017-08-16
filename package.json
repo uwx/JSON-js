@@ -1,0 +1,25 @@
+{
+  "name": "jsontest",
+  "version": "1.0.0",
+  "description": "WIP human-readable JSON format",
+  "main": "json_parse.js",
+  "dependencies": {
+    "line-column": "^1.0.2"
+  },
+  "devDependencies": {
+    "fs-extra": "github:uwx/node-fs-extra"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uwx/JSON-js.git"
+  },
+  "author": "uwx / fallk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uwx/JSON-js/issues"
+  },
+  "homepage": "https://github.com/uwx/JSON-js#readme"
+}

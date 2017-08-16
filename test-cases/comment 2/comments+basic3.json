@@ -1,0 +1,6 @@
+/*comment*/{ "wemes": "cool",/*comment*/
+  "boolean": true,
+  "crap": null,
+  "array": [
+    0, 1, 2, 3, 1.5, 8
+  ] }
