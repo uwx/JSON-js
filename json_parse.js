@@ -272,10 +272,21 @@ var json_parse = (function() {
     error('Bad string');
   }
 
-  // Skip whitespace.
+  // Skip whitespace. 
   function white() {
-    while (ch && ch <= ' ') {
-      next();
+    while (ch) {
+      // Skip spaces & control characters
+      while (ch && ch <= ' ') next();
+      // Allow comments
+      if (ch === '#' || ch === '/' && peek(1) === '/') {
+        while (ch && ch !== '\n') next();
+      } else if (ch === '/' && peek(1) === '*') {
+        next(); next();
+        while (ch && !(ch === '*' && peek(1) === '/')) next();
+        if (ch) {
+          next(); next();
+        }
+      } else break;
     }
   }
 
@@ -435,4 +446,8 @@ var json_parse = (function() {
 
 console.log(json_parse('{ "wemes": "cool" }')); // standard JSON
 console.log(json_parse('{ "wemes": "cool", }')); // trailing comma
+console.log(json_parse('{ "wemes": /*comment*/ "cool" }')); // standard JSON + comment
+console.log(json_parse('{ "wemes": /*comment*/ "cool", }')); // trailing comma + comment
+console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool" }')); // standard JSON + 2 comments
+console.log(json_parse('{ /*comment*/ "wemes": /*comment*/ "cool", }')); // trailing comma + 2 comments
 //console.log(json_parse('{ "wemes": false ]'));
