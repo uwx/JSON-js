@@ -267,7 +267,16 @@ var json_parse = (function() {
 
   // parse a key in a property object
   function keyName() {
-    if (ch === '"' || ch === "'") return string();
+    switch(ch) {
+      case '"':
+      case "'":
+        return string();
+      case '`':
+        return stringMultiline();
+      case '@':
+        next('@');
+        return stringNoEscape();
+    }
 
     var name = '';
 
