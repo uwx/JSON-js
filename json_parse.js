@@ -177,7 +177,12 @@ var json_parse = (function() {
     return ch;
   }
 
+  // std: peek N chars (if !soft will error on EOF)
+  // alt: peek look for string N (also obeys soft)
   function peek(n, soft = true) {
+    if (typeof n == 'string') {
+      return peek(n.length, soft) == n;
+    }
     if (at + n > text.length) {
       if (!soft) {
         error('Ended prematurely: expected at least ' + n + ' characters after "' + ch + '"');
@@ -221,7 +226,7 @@ var json_parse = (function() {
     }
     value = +string;
     if (!isFinite(value)) {
-      error('Bad number');
+      error('Number is Infinity/NaN');
     } else {
       return value;
     }
@@ -333,11 +338,17 @@ var json_parse = (function() {
     if (ch === '{') {
       next('{');
       white();
+      // TODO remove this for the one in the loop below?
       if (ch === '}') {
         next('}');
         return obj; // empty object
       }
       while (ch) {
+        // ignore trailing commas in objects
+        if (ch == '}') {
+          next('}');
+          return obj;
+        }
         key = string();
         white();
         next(':');
@@ -422,5 +433,6 @@ var json_parse = (function() {
   };
 }());
 
-console.log(json_parse('{ "wemes": "cool" }'));
-console.log(json_parse('{ "wemes": false ]'));
+console.log(json_parse('{ "wemes": "cool" }')); // standard JSON
+console.log(json_parse('{ "wemes": "cool", }')); // trailing comma
+//console.log(json_parse('{ "wemes": false ]'));
