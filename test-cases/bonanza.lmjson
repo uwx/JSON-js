@@ -37,6 +37,11 @@ two lines`,
               three lines // this should appear in the string
                it should
                 keep the extra spaces`,
+  `multilineKey`: {},
+  `multiline
+Key`: {},
+  `multiline
+   Key 2`: {},
   "empty": {},
   "emptyArray": [],
 }
