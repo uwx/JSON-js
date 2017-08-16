@@ -2,6 +2,26 @@
 
 Lean and simple JSON. For humans to write.
 
+## Usage
+
+```
+const lmjsonParse = require('lmjson');
+
+const object = lmjsonParse(`{
+  /* your LMJSON */
+  key: @"value"
+}`);
+
+console.log(object) // { key: 'value' }
+```
+
+## Object -> LMJSON
+
+LMJSON is designed only to be parsed. You cannot serialize an object into LMJSON.
+On the other hand, most JavaScript object initializers are valid LMJSON, so you can use that.
+
+## Syntax example
+
 ```
 { 
   // Key names without quotes
