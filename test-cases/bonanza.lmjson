@@ -12,16 +12,31 @@
   ],
   "nested": {
     "array": [
-        1, 4,
-        # Comment in a weird place
-        5
+      1, 4,
+      # Comment in a weird place
+      5
     ],
     "whew": {
-        "another": true
+      "another": true
     } // Not trailing
   },
   "come": "on!",
-  "come": @"Literal string\Documents\Memes\",
+  "lstrin": @"Literal string\My Documents\Memes\",
+  // Can now have singlequote keys!
+  'single key': "double value",
+  // And literals too!
+  @'single\lit key': "double value",
+  @"double\lit key": @'single\lit value\',
+  multiline: `multiline string in one line`,
+  multilin2: `multiline string in
+two lines`,
+  multilin3: `multiline string in
+              three lines // this should appear in the string
+              it skips the whitespace!`,
+  multilin4: `multiline string in
+              three lines // this should appear in the string
+               it should
+                keep the extra spaces`,
   "empty": {},
   "emptyArray": [],
 }
