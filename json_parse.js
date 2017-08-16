@@ -274,9 +274,10 @@ var json_parse = (function() {
 
     // When parsing for string values, we must look for " and \ characters.
 
-    if (ch === '"') {
+    if (ch === '"' || ch === "'") {
+      const endChar = ch; // single or double quote
       while (next()) {
-        if (ch === '"') {
+        if (ch === endChar) {
           next();
           return value;
         }
@@ -464,6 +465,7 @@ var json_parse = (function() {
         return object();
       case '[':
         return array();
+      case "'":
       case '"':
         return string();
       case '`':
