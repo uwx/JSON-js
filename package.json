@@ -1,6 +1,6 @@
 {
   "name": "lmjson",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Lean and simple JSON. For humans to write.",
   "main": "json_parse.js",
   "dependencies": {
