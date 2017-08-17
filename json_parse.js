@@ -175,6 +175,18 @@ var json_parse = (function() {
       const syntaxError = parseError(index.line, index.col-1, text);
       //console.log(syntaxError);
       this.stack = syntaxError + '\n' + this.stack;
+      
+      this.uwxDetail = {
+        syntaxError,
+        message,
+        at,
+        text,
+        index,
+        line: index.line,
+        col: index.col,
+        name: this.name,
+        stack: this.stack,
+      };
 
       //console.log(getAllPropertyNames(this).map(e => e + ': ' + this[e]).join(',\n  '));
 
