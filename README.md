@@ -72,3 +72,7 @@ Key`: {},
   "emptyArray": [],
 }
 ```
+
+Image example:
+
+<img src="http://i.imgur.com/iTZatVh.png">
