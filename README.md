@@ -73,6 +73,8 @@ Key`: {},
 }
 ```
 
+<img src="https://cdn.rawgit.com/uwx/ce213a8c70a40fe64b75457312594333/raw/44d3d0b5420cde9ebf2cbfd475ac2f532d130626/svg1.svg">
+
 Image example:
 
 <img src="http://i.imgur.com/iTZatVh.png">
