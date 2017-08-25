@@ -73,7 +73,7 @@ Key`: {},
 }
 ```
 
-<img src="https://cdn.rawgit.com/uwx/ce213a8c70a40fe64b75457312594333/raw/44d3d0b5420cde9ebf2cbfd475ac2f532d130626/svg1.svg">
+<a href="https://cdn.rawgit.com/uwx/adaa8ed38f7030b40221e8fe2d5b4c5c/raw/9392b70f47efa7ad5e89193ff23a8409831c028b/svg2.svg"><img src="https://cdn.rawgit.com/uwx/adaa8ed38f7030b40221e8fe2d5b4c5c/raw/9392b70f47efa7ad5e89193ff23a8409831c028b/svg2.svg" alt="This is an SVG file. click to open in a new tab"></a>
 
 Image example:
 
