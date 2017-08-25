@@ -17,10 +17,17 @@ console.log(object) // { key: 'value' }
 
 ## Object -> LMJSON
 
-LMJSON is designed only to be parsed. You cannot serialize an object into LMJSON.
+LMJSON is designed only to be parsed. There are many valid ways to express an Object or a tree-like syntax in LMJSON (Should the strings be literal? Should you have single or double quotes? Should you avoid quotes in key names?), so having a serializer would be silly.
 On the other hand, most JavaScript object initializers are valid LMJSON, so you can use that.
 
 ## Syntax example
+
+#### Rendered pretty syntax (click to open rendered HTML)
+
+<a href="https://cdn.rawgit.com/uwx/673faceeba2a1deaa0676ad94ff0e21f/raw/2c5f598985619f349d0addbffc9519b060d799f6/lmjson-example.html"><img src="https://cdn.rawgit.com/uwx/adaa8ed38f7030b40221e8fe2d5b4c5c/raw/9392b70f47efa7ad5e89193ff23a8409831c028b/svg2.svg"></a>  
+<sup>Because of certain SVG quirks, this may not look correct on mobile devices. Click it to open the original HTML file, which renders properly.</sup>
+
+#### Pure text example
 
 ```
 { 
@@ -72,9 +79,3 @@ Key`: {},
   "emptyArray": [],
 }
 ```
-
-<a href="https://cdn.rawgit.com/uwx/adaa8ed38f7030b40221e8fe2d5b4c5c/raw/9392b70f47efa7ad5e89193ff23a8409831c028b/svg2.svg"><img src="https://cdn.rawgit.com/uwx/adaa8ed38f7030b40221e8fe2d5b4c5c/raw/9392b70f47efa7ad5e89193ff23a8409831c028b/svg2.svg" alt="This is an SVG file. click to open in a new tab"></a>
-
-Image example:
-
-<img src="http://i.imgur.com/iTZatVh.png">
